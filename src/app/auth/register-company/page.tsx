@@ -13,31 +13,29 @@ export default function RegisterCompany() {
   // بيانات الشركة
   const [companyData, setCompanyData] = useState({
     name: "",
-    crNumber: "", // السجل التجاري
+    crNumber: "",
     email: "",
     phone: "",
     fleetSize: "",
     region: "",
   });
 
-  // قائمة المركبات (الأسطول)
+  // قائمة المركبات
   const [vehicles, setVehicles] = useState<any[]>([]);
   const [currentVehicle, setCurrentVehicle] = useState({
-    make: "", // الشركة المصنعة
+    make: "",
     model: "",
     year: "",
     plate: "",
-    vin: "", // رقم الهيكل
+    vin: "",
   });
 
   // الانتقال للخطوة التالية
   const handleNextStep = (e: React.FormEvent) => {
     e.preventDefault();
     if (step === 1) {
-      // هنا يمكن إضافة التحقق من صحة البيانات
       setStep(2);
     } else {
-      // إنهاء التسجيل والذهاب للداشبورد
       setIsLoading(true);
       setTimeout(() => {
         router.push("/dashboard");
@@ -45,7 +43,7 @@ export default function RegisterCompany() {
     }
   };
 
-  // إضافة مركبة للقائمة
+  // إضافة مركبة
   const addVehicle = () => {
     if (currentVehicle.make && currentVehicle.plate) {
       setVehicles([...vehicles, { ...currentVehicle, id: Date.now() }]);
@@ -61,26 +59,30 @@ export default function RegisterCompany() {
   return (
     <main dir="rtl" className="min-h-screen bg-[#081726] text-white flex flex-col items-center justify-center p-6 relative overflow-hidden">
       
-      {/* Decorative Glows */}
+      {/* خلفية جمالية */}
       <div className="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] bg-[#4DA3FF]/10 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-[#0B3C5D]/20 rounded-full blur-[120px] pointer-events-none" />
 
-      {/* الشعار - تم التكبير هنا */}
-      <div className="relative mb-10 z-10 animate-in fade-in zoom-in-95 duration-700">
-        <div className="relative w-80 h-24"> {/* تم تعديل الأبعاد لتكبير الشعار */}
+      {/* ✅ الشعار - تم تكبيره بشكل ضخم جداً */}
+      <div className="relative mb-12 z-10 animate-in fade-in zoom-in-95 duration-700 text-center">
+        {/* تم زيادة العرض والارتفاع بشكل كبير */}
+        <div className="relative w-[300px] h-[100px] md:w-[500px] md:h-[150px] mx-auto"> 
             <Image 
               src="/logo.png" 
               alt="SERVIX" 
               fill 
-              className="object-contain drop-shadow-[0_0_25px_rgba(77,163,255,0.4)]" 
+              className="object-contain drop-shadow-[0_0_30px_rgba(77,163,255,0.5)]" 
               priority 
             />
         </div>
+        <p className="text-[#4DA3FF] font-bold text-xl tracking-wide mt-2">
+          الخطوة الأولى نحو أسطول أذكى
+        </p>
       </div>
 
-      <div className="w-full max-w-3xl bg-[#0E2238]/80 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl overflow-hidden relative z-10">
+      <div className="w-full max-w-3xl bg-[#0E2238]/90 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl overflow-hidden relative z-10">
         
-        {/* Header with Steps */}
+        {/* Header */}
         <div className="bg-[#0B1C2D]/90 px-8 py-6 border-b border-white/5 flex justify-between items-center">
           <div>
             <h1 className="text-xl font-bold text-white tracking-wide">تسجيل منشأة جديدة</h1>
@@ -108,7 +110,7 @@ export default function RegisterCompany() {
                     <input
                       required
                       type="text"
-                      className="w-full bg-[#081726] border border-white/10 rounded-xl py-3 pr-10 pl-4 focus:border-[#4DA3FF] focus:ring-1 focus:ring-[#4DA3FF]/50 outline-none transition-all placeholder:text-gray-600"
+                      className="w-full bg-[#081726] border border-white/10 rounded-xl py-3 pr-10 pl-4 focus:border-[#4DA3FF] focus:ring-1 focus:ring-[#4DA3FF]/50 outline-none transition-all placeholder:text-gray-600 text-white"
                       placeholder="شركة النقل السريع..."
                       value={companyData.name}
                       onChange={(e) => setCompanyData({ ...companyData, name: e.target.value })}
@@ -120,7 +122,7 @@ export default function RegisterCompany() {
                   <input
                     required
                     type="text"
-                    className="w-full bg-[#081726] border border-white/10 rounded-xl py-3 px-4 focus:border-[#4DA3FF] focus:ring-1 focus:ring-[#4DA3FF]/50 outline-none transition-all placeholder:text-gray-600"
+                    className="w-full bg-[#081726] border border-white/10 rounded-xl py-3 px-4 focus:border-[#4DA3FF] focus:ring-1 focus:ring-[#4DA3FF]/50 outline-none transition-all placeholder:text-gray-600 text-white"
                     placeholder="700xxxxxxx"
                     value={companyData.crNumber}
                     onChange={(e) => setCompanyData({ ...companyData, crNumber: e.target.value })}
@@ -131,7 +133,7 @@ export default function RegisterCompany() {
                   <input
                     required
                     type="email"
-                    className="w-full bg-[#081726] border border-white/10 rounded-xl py-3 px-4 focus:border-[#4DA3FF] focus:ring-1 focus:ring-[#4DA3FF]/50 outline-none transition-all placeholder:text-gray-600"
+                    className="w-full bg-[#081726] border border-white/10 rounded-xl py-3 px-4 focus:border-[#4DA3FF] focus:ring-1 focus:ring-[#4DA3FF]/50 outline-none transition-all placeholder:text-gray-600 text-white"
                     placeholder="admin@company.com"
                     value={companyData.email}
                     onChange={(e) => setCompanyData({ ...companyData, email: e.target.value })}
@@ -176,7 +178,7 @@ export default function RegisterCompany() {
                   <input
                     type="text"
                     placeholder="تويوتا"
-                    className="w-full bg-[#0E2238] border border-white/10 rounded-lg p-2.5 text-sm focus:border-[#4DA3FF] outline-none transition-colors"
+                    className="w-full bg-[#0E2238] border border-white/10 rounded-lg p-2.5 text-sm focus:border-[#4DA3FF] outline-none transition-colors text-white"
                     value={currentVehicle.make}
                     onChange={(e) => setCurrentVehicle({ ...currentVehicle, make: e.target.value })}
                   />
@@ -186,7 +188,7 @@ export default function RegisterCompany() {
                   <input
                     type="text"
                     placeholder="هايلكس"
-                    className="w-full bg-[#0E2238] border border-white/10 rounded-lg p-2.5 text-sm focus:border-[#4DA3FF] outline-none transition-colors"
+                    className="w-full bg-[#0E2238] border border-white/10 rounded-lg p-2.5 text-sm focus:border-[#4DA3FF] outline-none transition-colors text-white"
                     value={currentVehicle.model}
                     onChange={(e) => setCurrentVehicle({ ...currentVehicle, model: e.target.value })}
                   />
@@ -196,7 +198,7 @@ export default function RegisterCompany() {
                   <input
                     type="text"
                     placeholder="أ ب ج 1234"
-                    className="w-full bg-[#0E2238] border border-white/10 rounded-lg p-2.5 text-sm focus:border-[#4DA3FF] outline-none transition-colors"
+                    className="w-full bg-[#0E2238] border border-white/10 rounded-lg p-2.5 text-sm focus:border-[#4DA3FF] outline-none transition-colors text-white"
                     value={currentVehicle.plate}
                     onChange={(e) => setCurrentVehicle({ ...currentVehicle, plate: e.target.value })}
                   />
@@ -206,7 +208,7 @@ export default function RegisterCompany() {
                   <input
                     type="text"
                     placeholder="اختياري"
-                    className="w-full bg-[#0E2238] border border-white/10 rounded-lg p-2.5 text-sm focus:border-[#4DA3FF] outline-none transition-colors"
+                    className="w-full bg-[#0E2238] border border-white/10 rounded-lg p-2.5 text-sm focus:border-[#4DA3FF] outline-none transition-colors text-white"
                     value={currentVehicle.vin}
                     onChange={(e) => setCurrentVehicle({ ...currentVehicle, vin: e.target.value })}
                   />
